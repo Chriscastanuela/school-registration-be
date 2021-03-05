@@ -7,10 +7,13 @@ app.locals.title = 'School registration site backend';
 
 app.locals.students = [
     {id: 001, firstName: 'Ruth', lastName: 'Bader-Ginsburg', email: 'rbg1@gmail.com', courses: []},
+    {id: 002, firstName: 'Sarah', lastName: 'Silverman', email: 'ss1@gmail.com', courses: []},
 ]
 
 app.locals.courses = [
-    {id: 001, name: '', time: 03/30/21},
+    {id: 001, name: 'English', time: 03/29/21},
+    {id: 002, name: 'History', time: 03/30/21},
+    {id: 003, name: 'Trigonometry', time: 03/31/21},
 ]
 
 app.get('/api/v1/students', (request, response) => {
@@ -32,7 +35,10 @@ app.get('/api/v1/courses', (request, response) => {
 
 app.get('/api/v1/courses:id', (request, response) => {
     const { id } = request.params;
-    const courses = app.locals.courses.find(course => course.id === id);
+    const course = app.locals.courses.find(course => course.id === id);
+    if (!pet) {
+        return response.sendStatus(404);
+      }
 
     response.status(200).json(course);
 });
