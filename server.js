@@ -24,3 +24,19 @@ app.get('/api/v1/students:id', (request, response) => {
 
     response.status(200).json(student);
 });
+
+app.get('/api/v1/courses', (request, response) => {
+    const courses = app.locals.courses;
+    response.json({ courses });
+});
+
+app.get('/api/v1/courses:id', (request, response) => {
+    const { id } = request.params;
+    const courses = app.locals.courses.find(course => course.id === id);
+
+    response.status(200).json(course);
+});
+
+app.listen(app.get('port'), () => {
+    console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
+});
