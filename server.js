@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 app.use(express.json());
 
-app.set('port', 3000);
+app.set('port', 3001);
 
 app.locals.title = 'School registration site backend';
 
