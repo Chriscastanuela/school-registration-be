@@ -9,9 +9,9 @@ app.locals.title = 'School registration site backend';
 app.locals.students = []
 
 app.locals.courses = [
-    {id: 001, name: 'English', time: 03/29/21},
-    {id: 002, name: 'History', time: 03/30/21},
-    {id: 003, name: 'Trigonometry', time: 03/31/21},
+    {id: 'aaa', name: 'English', time: '03/29/21'},
+    {id: 'aab', name: 'History', time: '03/30/21'},
+    {id: 'aac', name: 'Trigonometry', time: '03/31/21'},
 ]
 
 // app.get('/api/v1/students', (request, response) => {
@@ -43,9 +43,9 @@ app.get('/api/v1/courses:id', (request, response) => {
 
 app.post('/api/v1/students', (request, response) => {
     const id = Date.now();
-    const { id, firstName, lastName, email, courses } = request.body;
+    const { firstName, lastName, email, courses } = request.body;
 
-    if (!id || !firstName || !lastName || !email || !courses) {
+    if (!firstName || !lastName || !email || !courses) {
         response
           .status(422)
           .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String>, courses: <String> }. You're missing a property.` });
