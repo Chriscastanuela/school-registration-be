@@ -6,7 +6,9 @@ app.set('port', 3001);
 
 app.locals.title = 'School registration site backend';
 
-app.locals.students = []
+app.locals.students = [
+    {firstName: 'Ruth', lastName: 'Bader-Ginsburg', email: 'rbg1@hotmail.com', courses: []},
+]
 
 app.locals.courses = [
     {id: 'aaa', name: 'English', time: '03/29/21'},
@@ -14,10 +16,10 @@ app.locals.courses = [
     {id: 'aac', name: 'Trigonometry', time: '03/31/21'},
 ]
 
-// app.get('/api/v1/students', (request, response) => {
-//     const students = app.locals.students;
-//     response.json({ students });
-// });
+app.get('/api/v1/students', (request, response) => {
+    const students = app.locals.students;
+    response.json({ students });
+});
 
 app.get('/api/v1/students:id', (request, response) => {
     const { id } = request.params;
