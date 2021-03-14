@@ -54,7 +54,7 @@ app.post('/api/v1/students', (request, response) => {
 
     // response.status(201).json({ id, firstName, lastName, email, courses });
 
-    if (request.firstName && request.lastName && request.email && request.courses) {
+    if (request.body.firstName && request.body.lastName && request.body.email && request.body.courses) {
         const id = Date.now();
         const { firstName, lastName, email, courses } = request.body;
 
@@ -67,8 +67,15 @@ app.post('/api/v1/students', (request, response) => {
     }
 });
 
-app.post('api/vi/students', (request, response) => {
-    const { id } = request.body;
+app.post('api/vi/students/course', (request, response) => {
+    if (request.body.id) {
+        const theStudent = app.locals.students.find(a => a.id == request.body.studentId);
+        theStudent.courses.push(request.body.courseId)
+    } else {
+        response
+          .status(422)
+          .send({ error: `You're missing a property.` });
+    }
 })
 
 app.listen(app.get('port'), () => {
