@@ -30,11 +30,6 @@ app.get('/api/v1/students:id', (request, response) => {
     response.status(200).json(student);
 });
 
-// app.get('/api/v1/courses', (request, response) => {
-//     const courses = app.locals.courses;
-//     response.json({ courses });
-// });
-
 app.get('/api/v1/courses:id', (request, response) => {
     const { id } = request.params;
     const course = app.locals.courses.find(course => course.id === id);
