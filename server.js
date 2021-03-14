@@ -24,7 +24,7 @@ app.get('/api/v1/students', (request, response) => {
 });
 
 app.get('/api/v1/students:id', (request, response) => {
-    const { id } = request.params;
+    const { id } = request.body;
     const student = app.locals.students.find(student => student.id === id);
 
     response.status(200).json(student);
@@ -41,19 +41,6 @@ app.get('/api/v1/courses:id', (request, response) => {
 });
 
 app.post('/api/v1/students', (request, response) => {
-    // const id = Date.now();
-    // const { firstName, lastName, email, courses } = request.body;
-
-    // if (!firstName || !lastName || !email || !courses) {
-    //     response
-    //       .status(422)
-    //       .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String>, courses: <String> }. You're missing a property.` });
-    // }
-
-    // app.locals.students.push({ id, firstName, lastName, email, courses });
-
-    // response.status(201).json({ id, firstName, lastName, email, courses });
-
     if (request.body.firstName && request.body.lastName && request.body.email) {
         const id = Date.now();
         const { firstName, lastName, email } = request.body;
@@ -64,7 +51,7 @@ app.post('/api/v1/students', (request, response) => {
     } else {
         response
           .status(422)
-          .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String> }. You're missing a property.` });
+          .send({ error: `Unable to register, you're missing a property.` });
     }
 });
 
