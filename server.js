@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
 app.use(express.json());
+var cors = require('cors')
+app.use(cors())
 
 app.set('port', 3001);
 
 app.locals.title = 'School registration site backend';
 
 app.locals.students = [
-    {firstName: 'Ruth', lastName: 'Bader-Ginsburg', email: 'rbg1@hotmail.com', courses: []},
+    {id: 'aaa', firstName: 'Ruth', lastName: 'Bader-Ginsburg', email: 'rbg1@hotmail.com', courses: []},
 ]
 
 app.locals.courses = [
@@ -44,19 +46,35 @@ app.get('/api/v1/courses:id', (request, response) => {
 });
 
 app.post('/api/v1/students', (request, response) => {
-    const id = Date.now();
-    const { firstName, lastName, email, courses } = request.body;
+    // const id = Date.now();
+    // const { firstName, lastName, email, courses } = request.body;
 
-    if (!firstName || !lastName || !email || !courses) {
+    // if (!firstName || !lastName || !email || !courses) {
+    //     response
+    //       .status(422)
+    //       .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String>, courses: <String> }. You're missing a property.` });
+    // }
+
+    // app.locals.students.push({ id, firstName, lastName, email, courses });
+
+    // response.status(201).json({ id, firstName, lastName, email, courses });
+
+    if (request.firstName && request.lastName && request.email && request.courses) {
+        const id = Date.now();
+        const { firstName, lastName, email, courses } = request.body;
+
+        app.locals.students.push({ id, firstName, lastName, email, courses });
+        response.status(201).json({ id, firstName, lastName, email, courses });
+    } else {
         response
           .status(422)
           .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String>, courses: <String> }. You're missing a property.` });
     }
-
-    app.locals.students.push({ id, firstName, lastName, email, courses });
-
-    response.status(201).json({ id, firstName, lastName, email, courses });
 });
+
+app.post('api/vi/students', (request, response) => {
+    const { id } = request.body;
+})
 
 app.listen(app.get('port'), () => {
     console.log(`${app.locals.title} is running on http://localhost:${app.get('port')}.`);
