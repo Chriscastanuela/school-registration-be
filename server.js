@@ -54,16 +54,17 @@ app.post('/api/v1/students', (request, response) => {
 
     // response.status(201).json({ id, firstName, lastName, email, courses });
 
-    if (request.body.firstName && request.body.lastName && request.body.email && request.body.courses) {
+    if (request.body.firstName && request.body.lastName && request.body.email) {
         const id = Date.now();
-        const { firstName, lastName, email, courses } = request.body;
+        const { firstName, lastName, email } = request.body;
+        const courses = [];
 
         app.locals.students.push({ id, firstName, lastName, email, courses });
         response.status(201).json({ id, firstName, lastName, email, courses });
     } else {
         response
           .status(422)
-          .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String>, courses: <String> }. You're missing a property.` });
+          .send({ error: `Expected format: { id, firstName: <String>, lastName: <String>, email: <String> }. You're missing a property.` });
     }
 });
 
