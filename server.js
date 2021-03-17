@@ -15,7 +15,8 @@ app.locals.students = [
 app.locals.courses = [
     {id: 'aaa', name: 'English', time: '03/29/21'},
     {id: 'aab', name: 'History', time: '03/30/21'},
-    {id: 'aac', name: 'Trigonometry', time: '03/31/21'},
+    {id: 'aac', name: 'Science', time: '03/31/21'},
+    {id: 'aad', name: 'Art', time: '03/32/21'},
 ]
 
 app.get('/api/v1/students', (request, response) => {
@@ -23,11 +24,13 @@ app.get('/api/v1/students', (request, response) => {
     response.json({ students });
 });
 
-app.get('/api/v1/students:id', (request, response) => {
-    const { id } = request.body;
-    const student = app.locals.students.find(student => student.id === id);
+app.get('/api/v1/student:id', (request, response) => {
+    const { id }  = request.params;
+    console.log('aaaaaa', id)
+    const student = app.locals.students.find(student => student.id == id);
+    console.log('bbbbbb', student)
 
-    response.status(200).json(student);
+    response.json({student});
 });
 
 app.get('/api/vi/courses', (request, response) => {
