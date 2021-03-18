@@ -63,7 +63,7 @@ app.post('/api/v1/students', (request, response) => {
 app.post('/api/v1/course', (request, response) => {
     if (request.body.studentId) {
         const theStudent = app.locals.students.find(a => a.id == request.body.studentId);
-        theStudent.courses.push(request.body.courseId)
+        theStudent.courses.push(request.body.courseId);
     } else {
         response
           .status(422)
