@@ -1,1 +1,1 @@
-# [Front end](https://github.com/Chriscastanuela/guild-fe)
+# [Link to front end](https://github.com/Chriscastanuela/guild-fe)
